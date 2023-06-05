@@ -62,7 +62,6 @@
   document.addEventListener("keydown", (e) => {
     const audio  = document.querySelector(`audio[data-key=${e.code}]`);
     const key = document.querySelector(`.key[data-key=${e.code}]`);
-    key.repeat
 
     if (!audio || e.repeat) return; // if key is continuously held down, the event won't be repeatedly triggered
 
