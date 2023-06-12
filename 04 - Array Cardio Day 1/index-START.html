@@ -38,17 +38,45 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const invetors1500 = inventors.filter( (inventors) => {
+       return inventors.year.toString().slice(0, 2) === "15";
+    });
+
+    console.log(invetors1500)
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const inventorNames = inventors.map( (i) => {
+      return {
+        first: i.first,
+        last: i.last,
+      };
+    });
 
+    console.log(inventorNames);
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-
+    const old2Young = inventors.sort( (a, b) => {
+      return a.year > b.year;
+    });
+    console.log(old2Young);
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const sumYearsLive = inventors.reduce( (total, inventor) => {
+        return total + (inventor.passed - inventor.year);
+    }, 0);
 
+    console.log(sumYearsLive);
     // 5. Sort the inventors by years lived
+
+    const sortYearsLived = inventors.sort( (a, b) => {
+        a.yearsLived = (a.passed - a.year); 
+        b.yearsLived = (b.passed - b.year); 
+      
+      return (a.passed - a.year) > (b.passed - b.year);
+    });
+
+    console.table(sortYearsLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -57,10 +85,48 @@
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
+    peopleSortFirst = people.sort( (a, b) => {
+        const nameA = a.split(",");
+        const nameB = b.split(",");
+
+        return nameA[0] > nameB[0];
+    });
+
+    // peopleSortLast = people.sort( (a, b) => {
+    //     return a > b;
+    // });
+    console.table(people);
+
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    
+    // let dataObject = {};
+    // for (d of data)
+    // {
+    //   dataObject[d] = data.reduce( (accum, data) => {
+    //     return accum + (data === d ? 1 : 0);
+    // }, 0);
 
+    // }
+
+    const dataCount = data.reduce( (accum, data) => {
+
+        if (!accum[data])
+        accum[data] = 0;
+        
+        accum[data]++;
+
+        return accum;
+        
+    }, {});
+
+    // const dataCount = data.reduce( (accum, d) => {
+    //     return accum + (d === "car" ? 1 : 0);
+    // }, 0);
+
+    console.table(dataCount);
   </script>
 </body>
 </html>
+
